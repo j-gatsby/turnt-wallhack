@@ -39,5 +39,6 @@ int main(int argc, char* argv[])
     } 
     while (buffer != JPEG_SIG0 || buffer != JPEG_SIG1);
     
-    
+  // close memory card file
+  fclose(card);  
 }
