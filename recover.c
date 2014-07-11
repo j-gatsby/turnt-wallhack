@@ -15,6 +15,15 @@
 int main(int argc, char* argv[])
 {
     // open memory card file
-    FILE *file = fopen("card.raw", "r");
+    FILE *infile = fopen("card.raw", "r");
+    if (infile == NULL)
+    {
+        printf("Could not open %s.\n", infile);
+        return 1;
+    }
+    
+   // BYTE buffer;
+    
+    
     
 }
