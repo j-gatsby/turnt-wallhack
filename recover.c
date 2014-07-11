@@ -30,8 +30,14 @@ int main(int argc, char* argv[])
    // total number of blocks read off of card
     int blocks_read = 0;
     
-    // read card to buffer, one block at a time
-    fread(&buffer, sizeof(BYTE), BLOCK, card);
+    // find start of JPEGs
+    do
+    {
+    	// read card to buffer, one block at a time
+    	fread(&buffer, sizeof(BLOCK), 1, card);
+    	blocks_read++;
+    } 
+    while (buffer != JPEG_SIG0 || buffer != JPEG_SIG1);
     
     
 }
