@@ -7,12 +7,11 @@
  * Recovers JPEGs from a forensic image.
  */
  #include <stdio.h>
+ #include <stdint.h>
  
- #define JPEG_SIG0 0xff 0xd8 0xff 0xe0*
- #define JPEG_SIG1 0xff 0xd8 0xff 0xe1*
+ #define BLOCK 512
  
  typedef uint8_t  BYTE;
- typedef{uint8_t*512} BLOCK;
 
 int main(int argc, char* argv[])
 {
@@ -20,24 +19,28 @@ int main(int argc, char* argv[])
     FILE *card = fopen("card.raw", "r");
     if (card == NULL)
     {
-        printf("Could not open %s.\n", card);
+        printf("Could not open card.\n");
         return 1;
     }
     
     // temporary storage
-   BYTE buffer;
+   BYTE buffer[BLOCK];
    
    // total number of blocks read off of card
     int blocks_read = 0;
+    int bytes_read;
     
     // find start of JPEGs
-    do
+    for (bytes_read =0;  bytes_read < BLOCK; bytes_read++)
     {
-    	// read card to buffer, one block at a time
-    	fread(&buffer, sizeof(BLOCK), 1, card);
-    	blocks_read++;
+    	// read card to buffer, one byte at a time
+    	fread(&buffer[bytes_read], sizeof(BYTE), 1, card);
+    	
     } 
-    while (buffer != JPEG_SIG0 || buffer != JPEG_SIG1);
+    blocks_read++;
+    
+    printf("Bytes read = %d\n", bytes_read);
+    printf("Blocks read = %d\n", blocks_read);
     
   // close memory card file
   fclose(card);  
