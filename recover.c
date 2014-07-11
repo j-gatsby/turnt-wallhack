@@ -22,7 +22,8 @@ int main(int argc, char* argv[])
         return 1;
     }
     
-   // BYTE buffer;
+    // temporary storage
+   BYTE buffer;
     
     
     
