@@ -15,16 +15,18 @@
 int main(int argc, char* argv[])
 {
     // open memory card file
-    FILE *infile = fopen("card.raw", "r");
-    if (infile == NULL)
+    FILE *card = fopen("card.raw", "r");
+    if (card == NULL)
     {
-        printf("Could not open %s.\n", infile);
+        printf("Could not open %s.\n", card);
         return 1;
     }
     
     // temporary storage
    BYTE buffer;
     
+    // read card to buffer, one block at a time
+    fread(&buffer, sizeof(BYTE), BLOCK, card);
     
     
 }
