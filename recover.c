@@ -9,7 +9,7 @@
 
 int main(int argc, char* argv[])
 {
-    // TODO
+    // open memory card file
     FILE *file = fopen("card.raw", "r");
     
 }
