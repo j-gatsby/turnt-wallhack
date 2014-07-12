@@ -84,10 +84,12 @@ int main(int argc, char* argv[])
 		// you have not yet found the start of the jpegs
 		else
 		{
-			// empty buffer										<---------------- This might not be necessary. 
 			// just move on to the next block
 		}
     }// until the end of the file is reached
+     
+   // close the last file being written to
+   fclose(title);
      
   // close memory card file
   fclose(card);  
