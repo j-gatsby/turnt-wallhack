@@ -87,6 +87,7 @@ int main(int argc, char* argv[])
 			// just move on to the next block
 		}
     }// until the end of the file is reached
+     while (feof == 0);
      
    // close the last file being written to
    fclose(title);
