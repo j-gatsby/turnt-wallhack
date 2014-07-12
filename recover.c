@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
     int blocks_read = 0;
     int bytes_read;
     int jpegs_found = 0;
+    char title = 0;
     
     do
     {
@@ -48,8 +49,19 @@ int main(int argc, char* argv[])
 		if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] == 0xe0 || 0xe1))
 		{
 			// close any previous file being written to
+			if (title != 0)
+			{
+				fclose(title);
+			}
+			
 			// sprintf and create new file to store jpg, naming it 00jpegs_found.jpg
+			sprintf(title, "%02d.jpg", jpegs_found);
+			
+			// open new file
+			FILE* card = fopen(title, "a");
+			
 			// write from buffer to new file
+			fwrite(&buffer, sizeof(BYTE), BLOCK, title);
 			
 			// increment jpegs_found
 			jpegs_found++;
@@ -59,16 +71,17 @@ int main(int argc, char* argv[])
 		else if (jpegs_found > 0)		
 		{
 			// keep writing to it
+			fwrite(&buffer, sizeof(BYTE), BLOCK, title);
 		}
 		
 		// you have not yet found the start of the jpegs
 		else
 		{
-			// empty buffer
+			// empty buffer										<---------------- This might not be necessary. 
 			// just move on to the next block
 		}
     }// until the end of the file is reached
-    
+     
   // close memory card file
   fclose(card);  
 }
