@@ -60,6 +60,13 @@ int main(int argc, char* argv[])
 			// open new file
 			FILE* card = fopen(title, "a");
 			
+			// verify that new file is not NULL
+			if (title == NULL)
+    		{
+        		printf("Could not write to file.\n");
+        		return 2;
+    		}
+			
 			// write from buffer to new file
 			fwrite(&buffer, sizeof(BYTE), BLOCK, title);
 			
