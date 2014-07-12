@@ -40,22 +40,31 @@ int main(int argc, char* argv[])
 		} 
 		blocks_read++;
 		
+		// just for debugging
 		printf("Bytes read = %d\n", bytes_read);
 		printf("Blocks read = %d\n", blocks_read);
 		
-		// find start of JPEG
+		// you have found the start of JPEG
 		if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] == 0xe0 || 0xe1))
 		{
 			// close any previous file being written to
-			// sprintf and create new file to store jpg
+			// sprintf and create new file to store jpg, naming it 00jpegs_found.jpg
+			// write from buffer to new file
+			
 			// increment jpegs_found
+			jpegs_found++;
 		}
-		else if (// you are writing to a jpg file)
+		
+		// you have found a jpg and are writing to a new file
+		else if (jpegs_found > 0)		
 		{
 			// keep writing to it
 		}
+		
+		// you have not yet found the start of the jpegs
 		else
 		{
+			// empty buffer
 			// just move on to the next block
 		}
     }// until the end of the file is reached
