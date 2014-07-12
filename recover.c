@@ -48,7 +48,7 @@ int main(void)
 			fread(&buffer[bytes_read], sizeof(BYTE), 1, card);
 			
 			// check for end of file
-			while (bytes_read < 1)
+			if (bytes_read < 1)
 			{
 				if (feof(card) != 0)
 				{
