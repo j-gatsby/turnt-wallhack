@@ -31,6 +31,7 @@ int main(int argc, char* argv[])
     int bytes_read;
     int jpegs_found = 0;
     char title = 0;
+    int blocks_before_jpegs = 0;
     
     do
     {
@@ -85,6 +86,7 @@ int main(int argc, char* argv[])
 		else
 		{
 			// just move on to the next block
+			blocks_before_jpegs++;
 		}
     }// until the end of the file is reached
      while (feof == 0);
